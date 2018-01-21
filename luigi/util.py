@@ -336,7 +336,7 @@ class copies(object):
 
             def run(_self):
                 i, o = _self.input(), _self.output()
-                f = o.open('w')  # TODO: assert that i, o are Target objects and not complex datastructures
+                f = o.open('w')  # TODO: assert that i, o are Target objects and not complex datastructures gh:46
                 for line in i.open('r'):
                     f.write(line)
                 f.close()

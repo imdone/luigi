@@ -86,7 +86,7 @@ class RangeBase(luigi.WrapperTask):
 
     Subclasses will need to use the ``of`` parameter when overriding methods.
     """
-    # TODO lift the single parameter constraint by passing unknown parameters through WrapperTask?
+    # TODO lift the single parameter constraint by passing unknown parameters through WrapperTask? gh:44
     of = luigi.TaskParameter(
         description="task name to be completed. The task must take a single datetime parameter")
     of_params = luigi.DictParameter(default=dict(), description="Arguments to be provided to the 'of' class when instantiating")
@@ -101,7 +101,7 @@ class RangeBase(luigi.WrapperTask):
     task_limit = luigi.IntParameter(
         default=50,
         description="how many of 'of' tasks to require. Guards against scheduling insane amounts of tasks in one go")
-    # TODO overridable exclude_datetimes or something...
+    # TODO overridable exclude_datetimes or something... gh:26
     now = luigi.IntParameter(
         default=None,
         description="set to override current time. In seconds since epoch")
@@ -213,7 +213,7 @@ class RangeBase(luigi.WrapperTask):
             raise ParameterException("Either start needs to be specified or reverse needs to be True")
         if self.start and self.stop and self.start > self.stop:
             raise ParameterException("Can't have start > stop")
-        # TODO check overridden complete() and exists()
+        # TODO check overridden complete() and exists() gh:59
 
         now = datetime.utcfromtimestamp(time.time() if self.now is None else self.now)
 
@@ -244,7 +244,7 @@ class RangeBase(luigi.WrapperTask):
             logger.debug('Requiring %d missing %s instances in range %s',
                          len(required_datetimes), self.of_cls.task_family, self._format_range(required_datetimes))
         if self.reverse:
-            required_datetimes.reverse()  # TODO priorities, so that within the batch tasks are ordered too
+            required_datetimes.reverse()  # TODO priorities, so that within the batch tasks are ordered too gh:27
 
         self._cached_requires = [self._instantiate_task_cls(self.datetime_to_parameter(d)) for d in required_datetimes]
         return self._cached_requires
@@ -356,7 +356,7 @@ class RangeHourlyBase(RangeBase):
                      "be set shorter to that, too, to prevent the oldest "
                      "outputs flapping. Increase freely if you intend to "
                      "process old dates - worker's memory is the limit"))
-    # TODO always entire interval for reprocessings (fixed start and stop)?
+    # TODO always entire interval for reprocessings (fixed start and stop)? gh:29
     hours_forward = luigi.IntParameter(
         default=0,
         description="extent to which contiguousness is to be assured into future, in hours from current time. Prevents infinite loop when stop is none")
@@ -559,7 +559,7 @@ def _get_per_location_glob(tasks, outputs, regexes):
     # to be conclusive hit or miss
     positions = [most_common((m.start(i), m.end(i)) for m in matches)[0] for i in range(1, n_groups + 1)]
 
-    glob = list(paths[0])  # FIXME sanity check that it's the same for all paths
+    glob = list(paths[0])  # FIXME sanity check that it's the same for all paths gh:45
     for start, end in positions:
         glob = glob[:start] + ['[0-9]'] * (end - start) + glob[end:]
     # chop off the last path item
@@ -577,7 +577,7 @@ def _get_filesystems_and_globs(datetime_to_task, datetime_to_re):
     in which case outputs of all its dependencies are considered.
     """
     # probe some scattered datetimes unlikely to all occur in paths, other than by being sincere datetime parameter's representations
-    # TODO limit to [self.start, self.stop) so messages are less confusing? Done trivially it can kill correctness
+    # TODO limit to [self.start, self.stop) so messages are less confusing? Done trivially it can kill correctness gh:30
     sample_datetimes = [datetime(y, m, d, h) for y in range(2000, 2050, 10) for m in range(1, 4) for d in range(5, 8) for h in range(21, 24)]
     regexes = [re.compile(datetime_to_re(d)) for d in sample_datetimes]
     sample_tasks = [datetime_to_task(d) for d in sample_datetimes]
@@ -586,8 +586,8 @@ def _get_filesystems_and_globs(datetime_to_task, datetime_to_re):
     for o, t in zip(sample_outputs, sample_tasks):
         if len(o) != len(sample_outputs[0]):
             raise NotImplementedError("Outputs must be consistent over time, sorry; was %r for %r and %r for %r" % (o, t, sample_outputs[0], sample_tasks[0]))
-            # TODO fall back on requiring last couple of days? to avoid astonishing blocking when changes like that are deployed
-            # erm, actually it's not hard to test entire hours_back..hours_forward and split into consistent subranges FIXME?
+            # TODO fall back on requiring last couple of days? to avoid astonishing blocking when changes like that are deployed gh:60
+            # erm, actually it's not hard to test entire hours_back..hours_forward and split into consistent subranges FIXME ? gh:32
         for target in o:
             if not isinstance(target, FileSystemTarget):
                 raise NotImplementedError("Output targets must be instances of FileSystemTarget; was %r for %r" % (target, t))
@@ -687,7 +687,7 @@ class RangeHourly(RangeHourlyBase):
 
     def missing_datetimes(self, finite_datetimes):
         try:
-            # TODO: Why is there a list() here but not for the RangeDaily??
+            # TODO: Why is there a list() here but not for the RangeDaily?? gh:33
             cls_with_params = functools.partial(self.of, **self.of_params)
             complete_parameters = self.of.bulk_complete.__func__(cls_with_params, list(map(self.datetime_to_parameter, finite_datetimes)))
             return set(finite_datetimes) - set(map(self.parameter_to_datetime, complete_parameters))

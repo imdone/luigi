@@ -52,7 +52,7 @@ except ImportError:
     logger.warning('docker is not installed. DockerTask requires docker.')
     docker = None
 
-# TODO: may need to implement this logic for remote hosts
+# TODO: may need to implement this logic for remote hosts gh:52
 # class dockerconfig(luigi.Config):
 #     '''
 #     this class allows to use the luigi.cfg file to specify the path to the docker config.json.
@@ -144,7 +144,7 @@ class DockerTask(luigi.Task):
             self._image = self.image
 
         if self.mount_tmp:
-            # create a tmp_dir, NOTE: /tmp needs to be specified for it to work on
+            # create a tmp_dir, NOTE: /tmp needs to be specified for it to work on gh:3
             # macOS, despite what the python documentation says
             self._host_tmp_dir = mkdtemp(suffix=self.task_id,
                                          prefix='luigi-docker-tmp-dir-',

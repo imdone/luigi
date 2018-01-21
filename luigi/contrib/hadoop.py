@@ -150,7 +150,7 @@ def create_packages_archive(packages, filename):
         n = package.__name__.replace(".", "/")
 
         if getattr(package, "__path__", None):
-            # TODO: (BUG) picking only the first path does not
+            # TODO: (BUG) picking only the first path does not gh:5
             # properly deal with namespaced packages in different
             # directories
             p = package.__path__[0]
@@ -585,7 +585,7 @@ class HadoopJobRunner(JobRunner):
         self.finish()
 
     def finish(self):
-        # FIXME: check for isdir?
+        # FIXME: check for isdir? gh:23
         if self.tmp_dir and os.path.exists(self.tmp_dir):
             logger.debug('Removing directory %s', self.tmp_dir)
             shutil.rmtree(self.tmp_dir)
@@ -603,7 +603,7 @@ class DefaultHadoopJobRunner(HadoopJobRunner):
         config = configuration.get_config()
         streaming_jar = config.get('hadoop', 'streaming-jar')
         super(DefaultHadoopJobRunner, self).__init__(streaming_jar=streaming_jar)
-        # TODO: add more configurable options
+        # TODO: add more configurable options gh:9
 
 
 class LocalJobRunner(JobRunner):

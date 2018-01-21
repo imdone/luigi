@@ -649,7 +649,7 @@ class DateIntervalParameter(Parameter):
         see :py:mod:`luigi.date_interval`
           for details on the parsing of DateIntervals.
         """
-        # TODO: can we use xml.utils.iso8601 or something similar?
+        # TODO: can we use xml.utils.iso8601 or something similar? gh:13
 
         from luigi import date_interval as d
 

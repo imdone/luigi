@@ -26,7 +26,7 @@
 }(this, function (punycode, IPv6, SLD, root) {
   'use strict';
   /*global location, escape, unescape */
-  // FIXME: v2.0.0 renamce non-camelCase properties to uppercase
+  // FIXME: v2.0.0 renamce non-camelCase properties to uppercase gh:57
   /*jshint camelcase: false */
 
   // save current URI variable, if any

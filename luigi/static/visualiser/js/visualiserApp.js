@@ -500,7 +500,7 @@ function visualiserApp(luigi) {
                 var taskDiv = $(this).find('.taskNode');
                 var taskId = taskDiv.attr("data-task-id");
                 event.preventDefault();
-                // NOTE : hasClass() not reliable inside SVG
+                // NOTE : hasClass() not reliable inside SVG gh:39
                 if ($(this).attr('class').match(/\bFAILED\b/)) {
                     luigi.getErrorTrace(taskId, function (error) {
                         showErrorTrace(error);
@@ -722,7 +722,7 @@ function visualiserApp(luigi) {
                 'DISABLED',
                 'FAILED'
             ];
-            // NOTE : -1 indicates not in list
+            // NOTE : -1 indicates not in list gh:18
             var i1 = priorities.indexOf(cat1);
             var i2 = priorities.indexOf(cat2);
             var ret;

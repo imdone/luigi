@@ -306,7 +306,7 @@ class MapreduceIntegrationTest(minicluster.MiniClusterTestCase):
     def test_map_only(self):
         CommonTests.test_map_only(self)
 
-    # TODO(erikbern): some really annoying issue with minicluster causes
+    # TODO (erikbern): some really annoying issue with minicluster causes gh:50
     # test_unicode_job to hang
 
     def test_failing_job(self):

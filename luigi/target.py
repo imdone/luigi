@@ -285,7 +285,7 @@ class FileSystemTarget(Target):
                     slashless_path,
                     num,
                     self.target._trailing_slash())
-                # TODO: os.path doesn't make sense here as it's os-dependent
+                # TODO: os.path doesn't make sense here as it's os-dependent gh:21
                 tmp_dir = os.path.dirname(slashless_path)
                 if tmp_dir:
                     self.target.fs.mkdir(tmp_dir, parents=True, raise_if_exists=False)

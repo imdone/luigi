@@ -36,7 +36,7 @@ var LuigiAPI = (function() {
     }
 
     function searchTerm() {
-        // FIXME : leaky API.  This shouldn't rely on the DOM.
+        // FIXME : leaky API.  This shouldn't rely on the DOM. gh:19
         if ($('#serverSideCheckbox')[0].checked) {
             return $('#taskTable_filter').find('input').val();
         }

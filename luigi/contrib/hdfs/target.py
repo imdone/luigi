@@ -92,7 +92,7 @@ class HdfsTarget(FileSystemTarget):
         self._fs = fs or hdfs_clients.get_autoconfig_client()
 
     def __del__(self):
-        # TODO: not sure is_tmp belongs in Targets construction arguments
+        # TODO: not sure is_tmp belongs in Targets construction arguments gh:8
         if self.is_tmp and self.exists():
             self.remove(skip_trash=True)
 

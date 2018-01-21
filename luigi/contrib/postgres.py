@@ -63,7 +63,7 @@ class MultiReplacer(object):
         >>> MultiReplacer(replace_pairs)("ab")
         'xb'
     """
-# TODO: move to misc/util module
+# TODO: move to misc/util module gh:28
 
     def __init__(self, replace_pairs):
         """
@@ -144,7 +144,7 @@ class PostgresTarget(luigi.Target):
         self.create_marker_table()
 
         if connection is None:
-            # TODO: test this
+            # TODO: test this gh:11
             connection = self.connect()
             connection.autocommit = True  # if connection created here, we commit it here
 

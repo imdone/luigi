@@ -55,7 +55,7 @@ before_install:
     || export DIDNT_CREATE_GCP_CREDS=1
 
 before_script:
-  # TODO, only do this step for the postgres environment
+  # TODO , only do this step for the postgres environment gh:4
   - psql -c 'create database spotify;' -U postgres
 
   # Create mysql database if possible but fail silently if not available.

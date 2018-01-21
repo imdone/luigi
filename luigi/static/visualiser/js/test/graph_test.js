@@ -78,5 +78,5 @@ test("createGraph", function() {
         notEqual(this.y, 0);
     });
 
-    // TODO: more assertions
+    // TODO: more assertions gh:17
 });

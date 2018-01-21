@@ -281,10 +281,10 @@ class Task(object):
     @property
     def task_module(self):
         ''' Returns what Python module to import to get access to this class. '''
-        # TODO(erikbern): we should think about a language-agnostic mechanism
+        # TODO (erikbern): we should think about a language-agnostic mechanism gh:20
         return self.__class__.__module__
 
-    _visible_in_registry = True  # TODO: Consider using in luigi.util as well
+    _visible_in_registry = True  # TODO: Consider using in luigi.util as well gh:42
 
     __not_user_specified = '__not_user_specified'
 
@@ -385,7 +385,7 @@ class Task(object):
         task_family = cls.get_task_family()
 
         # In case any exceptions are thrown, create a helpful description of how the Task was invoked
-        # TODO: should we detect non-reprable arguments? These will lead to mysterious errors
+        # TODO: should we detect non-reprable arguments? These will lead to mysterious errors gh:22
         exc_desc = '%s[args=%s, kwargs=%s]' % (task_family, args, kwargs)
 
         # Fill in the positional arguments
@@ -810,7 +810,7 @@ class Config(Task):
     """
     Class for configuration. See :ref:`ConfigClasses`.
     """
-    # TODO: let's refactor Task & Config so that it inherits from a common
+    # TODO: let's refactor Task & Config so that it inherits from a common gh:58
     # ParamContainer base class
     pass
 

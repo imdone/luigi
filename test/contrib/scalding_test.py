@@ -59,4 +59,4 @@ class ScaldingTest(unittest.TestCase):
     def test_scalding(self, check_call, track_job):
         success = luigi.run(['MyScaldingTask', '--scala-source', self.scala_source, '--local-scheduler', '--no-lock'])
         self.assertTrue(success)
-        # TODO: check more stuff
+        # TODO: check more stuff gh:38

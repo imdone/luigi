@@ -67,7 +67,7 @@ class WordCount(luigi.Task):
         """
         count = {}
 
-        # NOTE: self.input() actually returns an element for the InputText.output() target
+        # NOTE: self.input() actually returns an element for the InputText.output() target gh:7
         for f in self.input():  # The input() method is a wrapper around requires() that returns Target objects
             for line in f.open('r'):  # Target objects are a file system/format abstraction and this will return a file stream object
                 for word in line.strip().split():
