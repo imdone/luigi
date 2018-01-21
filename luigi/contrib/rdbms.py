@@ -115,7 +115,7 @@ class CopyToTable(luigi.task.MixinNaiveBulkComplete, luigi.Task):
         to keep a rolling window of data available in the table.
         """
 
-        # TODO: remove this after sufficient time so most people using the
+        # TODO: remove this after sufficient time so most people using the gh:54
         # clear_table attribtue will have noticed it doesn't work anymore
         if hasattr(self, "clear_table"):
             raise Exception("The clear_table attribute has been removed. Override init_copy instead!")

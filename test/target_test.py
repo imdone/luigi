@@ -250,7 +250,7 @@ class FileSystemTargetTestMixin(object):
 
     def test_move_on_fs(self):
         # We're cheating and retrieving the fs from target.
-        # TODO: maybe move to "filesystem_test.py" or something
+        # TODO: maybe move to "filesystem_test.py" or something gh:63
         t = self.create_target()
         other_path = t.path + '-' + str(random.randint(0, 999999999))
         t._touchz()
@@ -261,7 +261,7 @@ class FileSystemTargetTestMixin(object):
 
     def test_rename_dont_move_on_fs(self):
         # We're cheating and retrieving the fs from target.
-        # TODO: maybe move to "filesystem_test.py" or something
+        # TODO: maybe move to "filesystem_test.py" or something gh:41
         t = self.create_target()
         other_path = t.path + '-' + str(random.randint(0, 999999999))
         t._touchz()

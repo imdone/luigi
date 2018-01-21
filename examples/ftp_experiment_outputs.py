@@ -86,7 +86,7 @@ class ProcessingTask(luigi.Task):
         sumval = 0.0
 
         # Target objects are a file system/format abstraction and this will return a file stream object
-        # NOTE: self.input() actually returns the ExperimentTask.output() target
+        # NOTE: self.input() actually returns the ExperimentTask.output() target gh:1
         for line in self.input().open('r'):
             values = line.split(" ")
             avg += float(values[2])

@@ -121,7 +121,7 @@ def rpc_method(**request_args):
 
 
 class scheduler(Config):
-    # TODO(erikbern): the config_path is needed for backwards compatilibity. We
+    # TODO (erikbern): the config_path is needed for backwards compatilibity. We gh:14
     # should drop the compatibility at some point
     retry_delay = parameter.FloatParameter(default=900.0)
     remove_delay = parameter.FloatParameter(default=600.0)
@@ -310,7 +310,7 @@ class Task(object):
     def __repr__(self):
         return "Task(%r)" % vars(self)
 
-    # TODO(2017-08-10) replace this function with direct calls to batchable
+    # TODO (2017-08-10) replace this function with direct calls to batchable gh:55
     # this only exists for backward compatibility
     def is_batchable(self):
         try:
@@ -450,7 +450,7 @@ class SimpleTaskState(object):
         else:
             logger.info("Saved state in %s", self._state_path)
 
-    # prone to lead to crashes when old state is unpickled with updated code. TODO some kind of version control?
+    # prone to lead to crashes when old state is unpickled with updated code. TODO some kind of version control? gh:12
     def load(self):
         if os.path.exists(self._state_path):
             logger.info("Attempting to load state from %s", self._state_path)
@@ -679,7 +679,7 @@ class Scheduler(object):
             self._task_history = db_task_history.DbTaskHistory()
         else:
             self._task_history = history.NopHistory()
-        self._resources = resources or configuration.get_config().getintdict('resources')  # TODO: Can we make this a Parameter?
+        self._resources = resources or configuration.get_config().getintdict('resources')  # TODO: Can we make this a Parameter? gh:15
         self._make_task = functools.partial(Task, retry_policy=self._config._get_retry_policy())
         self._worker_requests = {}
         self._paused = False
@@ -1042,7 +1042,7 @@ class Scheduler(object):
 
     @rpc_method(allow_null=False)
     def get_work(self, host=None, assistant=False, current_tasks=None, worker=None, **kwargs):
-        # TODO: remove any expired nodes
+        # TODO: remove any expired nodes gh:36
 
         # Algo: iterate over all nodes, find the highest priority node no dependencies and available
         # resources.
@@ -1052,7 +1052,7 @@ class Scheduler(object):
         # checks in order to prevent a worker with many low-priority tasks from starving other
         # workers with higher priority tasks that share the same resources.
 
-        # TODO: remove tasks that can't be done, figure out if the worker has absolutely
+        # TODO: remove tasks that can't be done, figure out if the worker has absolutely gh:16
         # nothing it can wait for
 
         if self._config.prune_on_get_work:
@@ -1291,7 +1291,7 @@ class Scheduler(object):
             if task is None or not task.family:
                 logger.debug('Missing task for id [%s]', task_id)
 
-                # NOTE : If a dependency is missing from self._state there is no way to deduce the
+                # NOTE : If a dependency is missing from self._state there is no way to deduce the gh:56
                 #        task family and parameters.
                 family_match = TASK_FAMILY_RE.match(task_id)
                 family = family_match.group(1) if family_match else UNKNOWN

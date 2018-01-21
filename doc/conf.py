@@ -44,7 +44,7 @@ try:
         """
         assert needle in haystack
 
-    # TODO: find a better place to put this!
+    # TODO: find a better place to put this! gh:2
     assertIn('IntParameter', repr(luigi.IntParameter()))
     assertIn('defaults to 37', repr(luigi.IntParameter(default=37)))
     assertIn('hi mom', repr(luigi.IntParameter(description='hi mom')))

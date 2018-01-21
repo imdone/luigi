@@ -851,7 +851,7 @@ class SnakebiteConfigTest(unittest.TestCase):
 
 class _MiscOperationsMixin(object):
 
-    # TODO: chown/chmod/count should really be methods on HdfsTarget rather than the client!
+    # TODO: chown/chmod/count should really be methods on HdfsTarget rather than the client! gh:62
 
     def get_target(self):
         fn = '/tmp/foo-%09d' % random.randint(0, 999999999)

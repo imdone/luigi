@@ -79,7 +79,7 @@ class HadoopJarJobRunner(luigi.contrib.hadoop.JobRunner):
             warnings.warn("tracking_url_callback argument is deprecated, task.set_tracking_url is "
                           "used instead.", DeprecationWarning)
 
-        # TODO(jcrobak): libjars, files, etc. Can refactor out of
+        # TODO (jcrobak): libjars, files, etc. Can refactor out of gh:53
         # hadoop.HadoopJobRunner
         if not job.jar():
             raise HadoopJarJobError("Jar not defined")

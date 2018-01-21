@@ -182,7 +182,7 @@ class TaskProcess(multiprocessing.Process):
 
             if _is_external(self.task):
                 # External task
-                # TODO(erikbern): We should check for task completeness after non-external tasks too!
+                # TODO (erikbern): We should check for task completeness after non-external tasks too! gh:34
                 # This will resolve #814 and make things a lot more consistent
                 if self.task.complete():
                     status = DONE
@@ -338,7 +338,7 @@ def check_complete(task, out_queue):
 
 
 class worker(Config):
-    # NOTE: `section.config-variable` in the config_path argument is deprecated in favor of `worker.config_variable`
+    # NOTE: `section.config-variable` in the config_path argument is deprecated in favor of `worker.config_variable` gh:61
 
     ping_interval = FloatParameter(default=1.0,
                                    config_path=dict(section='core', name='worker-ping-interval'))
@@ -872,7 +872,7 @@ class Worker(object):
             logger.info('Did not schedule %s, will load it dynamically', task_id)
 
             try:
-                # TODO: we should obtain the module name from the server!
+                # TODO: we should obtain the module name from the server! gh:35
                 self._scheduled_tasks[task_id] = \
                     load_task(module=r.get('task_module'),
                               task_name=r['task_family'],
@@ -893,7 +893,7 @@ class Worker(object):
             n_pending_tasks=r['n_pending_tasks'],
             n_unique_pending=r['n_unique_pending'],
 
-            # TODO: For a tiny amount of time (a month?) we'll keep forwards compatibility
+            # TODO: For a tiny amount of time (a month?) we'll keep forwards compatibility gh:37
             #  That is you can user a newer client than server (Sep 2016)
             n_pending_last_scheduled=r.get('n_pending_last_scheduled', 0),
             worker_state=r.get('worker_state', WORKER_STATE_ACTIVE),
@@ -1017,7 +1017,7 @@ class Worker(object):
             return
 
     def _sleeper(self):
-        # TODO is exponential backoff necessary?
+        # TODO is exponential backoff necessary? gh:47
         while True:
             jitter = self._config.wait_jitter
             wait_interval = self._config.wait_interval + random.uniform(0, jitter)

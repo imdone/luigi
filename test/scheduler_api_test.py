@@ -72,7 +72,7 @@ class SchedulerApiTest(unittest.TestCase):
         self.assertEqual(self.sch.get_work(worker=WORKER)['task_id'], 'A')
         self.sch.add_task(worker=WORKER, task_id='A', status=FAILED)
 
-        self.assertEqual(self.sch.get_work(worker=WORKER)['task_id'], None)  # can still wait and retry: TODO: do we want this?
+        self.assertEqual(self.sch.get_work(worker=WORKER)['task_id'], None)  # can still wait and retry: TODO: do we want this? gh:48
         self.sch.add_task(worker=WORKER, task_id='A', status=DONE)
         self.assertEqual(self.sch.get_work(worker=WORKER)['task_id'], 'B')
         self.sch.add_task(worker=WORKER, task_id='B', status=DONE)
@@ -82,7 +82,7 @@ class SchedulerApiTest(unittest.TestCase):
         self.sch.add_task(worker=WORKER, task_id='B', deps=('A',))
         self.sch.add_task(worker=WORKER, task_id='A', runnable=False)
 
-        self.assertEqual(self.sch.get_work(worker=WORKER)['task_id'], None)  # can still wait and retry: TODO: do we want this?
+        self.assertEqual(self.sch.get_work(worker=WORKER)['task_id'], None)  # can still wait and retry: TODO: do we want this? gh:51
         self.sch.add_task(worker=WORKER, task_id='A', status=DONE)
         self.assertEqual(self.sch.get_work(worker=WORKER)['task_id'], 'B')
         self.sch.add_task(worker=WORKER, task_id='B', status=DONE)

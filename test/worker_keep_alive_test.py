@@ -78,7 +78,7 @@ class WorkerKeepAliveUpstreamTest(LuigiTestCase):
         """
         One dependency disables and one succeeds
         """
-        # TODO: Fix copy paste mess
+        # TODO: Fix copy paste mess gh:49
         class Disabler(luigi.Task):
             pass
 

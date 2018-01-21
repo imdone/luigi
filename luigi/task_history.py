@@ -32,7 +32,7 @@ class StoredTask(object):
     Interface for methods on TaskHistory
     """
 
-    # TODO : do we need this task as distinct from luigi.scheduler.Task?
+    # TODO : do we need this task as distinct from luigi.scheduler.Task? gh:24
     #        this only records host and record_id in addition to task parameters.
 
     def __init__(self, task, status, host=None):
@@ -68,7 +68,7 @@ class TaskHistory(object):
     def task_started(self, task, worker_host):
         pass
 
-    # TODO(erikbern): should web method (find_latest_runs etc) be abstract?
+    # TODO (erikbern): should web method (find_latest_runs etc) be abstract? gh:25
 
 
 class NopHistory(TaskHistory):

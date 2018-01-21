@@ -46,7 +46,7 @@ except ImportError:
         HAS_REQUESTS = False
 
 
-logger = logging.getLogger('luigi-interface')  # TODO: 'interface'?
+logger = logging.getLogger('luigi-interface')  # TODO: 'interface'? gh:31
 
 
 def _urljoin(base, url):

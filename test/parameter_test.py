@@ -919,7 +919,7 @@ class TestParamWithDefaultFromConfig(LuigiTestCase):
                 return True
 
         self.assertTrue(self.run_locally_split('mynamespace.A --expected 100'))
-        # TODO(arash): Why is `--p 200` hanging with multiprocessing stuff?
+        # TODO (arash): Why is `--p 200` hanging with multiprocessing stuff? gh:40
         # self.assertTrue(self.run_locally_split('mynamespace.A --p 200 --expected 200'))
         self.assertTrue(self.run_locally_split('mynamespace.A --mynamespace.A-p 200 --expected 200'))
         self.assertFalse(self.run_locally_split('mynamespace.A --A-p 200 --expected 200'))
